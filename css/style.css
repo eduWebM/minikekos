@@ -1,0 +1,391 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+html{
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+*, *::after, *::before{
+    box-sizing: inherit;
+}
+body, p{
+    margin: 0;
+}
+body{
+    min-height: 100vh;
+}
+a{
+    text-decoration: none;
+}
+header{
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    box-shadow: 0 2px 5px 2px #000;
+}
+
+/* HEADER */
+.carousel-container{
+    padding: 1rem;
+    background-color: green;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.carousel-container p {
+    opacity: 0;
+    position: absolute;
+    transition: opacity 1s ease-in-out;
+    font-size: clamp(14px, 2vw, 18px);
+    font-family: "Caveat", cursive;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+.carousel-container p:first-child {
+    opacity: 1;
+}
+.menu-icons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: .5rem 0;
+    background-color: #fff;
+}
+.menu-icons-activado{
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+.user-cart-icons{
+    display: flex;
+    column-gap: 10px;
+}
+.user-cart-icons-activado{
+    display: none;
+}
+
+/* LOGO */
+.a-logo{
+    z-index: 10;
+}
+#logo{
+    width: clamp(40px, 18vw, 80px);
+}
+/* Fin-Logo */
+
+.bi{
+    font-size: clamp(40px, 10vw, 45px);
+}
+
+/* HAMBURGUESA */
+.ham{
+    transition: transform 300ms;
+    z-index: 10;
+}
+.rotar{
+    transform: rotate(90deg);
+    animation: muestraMenu 300ms ease-in-out both;
+}
+/* Fin-Hamburguesa */
+
+/* BUSCADOR */
+.search{
+    position: relative;
+    background-color: green;
+    padding: .5rem 0;
+}
+.search form{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+input[type="search"]{
+    width: 100%;
+    height: 3ex;
+    border-color: red;
+    padding: .5rem;
+}
+.search .bi{
+    position: absolute;
+    top: 51%;
+    right: 12%;
+    transform: translateY(-50%);
+    font-size: clamp(18px, 2vw, 20px);
+}
+/* Fin-Buscador */
+
+/* ENLACES PAGINA */
+.nav-bar{
+    display: none;
+}
+.activado{ /* menú navegación mobile */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    padding-top: 13ex;
+    background-color: #fff;
+    animation: muestraMenu 700ms ease-in-out both;
+}
+.menu-bar, .submenu-bar{
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+.submenu-bar li:first-child a{
+    font-weight: bolder;
+    font-size: 1.4rem;
+}
+:is(.menu-bar, .submenu-bar) li{
+    list-style-type: none;
+    border-bottom: thin solid #000;
+    margin-bottom: 10px;
+    padding-left: .5rem;
+    min-height: 40px;
+}
+:is(.menu-bar, .submenu-bar) li > a{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #000;
+    font-size: 1.1rem;
+}
+.submenu-bar{
+    display: none;
+}
+.submenu-bar .marcas, .img-categoria{
+    display: none;
+}
+.submenu-flecha, .inicio-flecha{
+   font-size: 2rem;
+}
+/* oculto la flecha derecha en aquellos <li> que no tienen submenús */
+li:not(:has(.submenu-bar)) .submenu-flecha {
+    visibility: hidden;
+}
+.mostrar-submenu{
+    display: block;
+    position: fixed;
+    inset: 0;
+    padding-top: 15ex;
+    z-index: 3;
+    background-color: #fff;
+    animation: derechaMenu 500ms;
+}
+.desplazar-submenu{
+    animation: izquierdaMenu 500ms;
+}
+.ocultar-submenu{
+    position: relative;
+    display: none;
+}
+/* Fin-Enlaces Página */
+
+/* Cookies */
+#alert-dialog .contenedor-dialog{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 70vh;
+    width: clamp(240px, 45vw, 900px);
+    text-align: center;
+    padding: 2%;
+}
+.img-cookie{
+    width: clamp(120px, 10vw, 170px);
+}
+.container-button{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    width: 100%;
+}
+#alert-dialog::backdrop {
+  background: linear-gradient(#000d, #000a);
+}
+.cerrar-modal{
+    display: none;
+}
+/* Fin-Cookies */
+
+/* Banner */
+.carousel-item{
+    height: 80vh;
+}
+.carousel-item img{
+    height: 100%;
+    object-fit: cover;
+}
+.carousel-caption h2 {
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(26px, 4vw, 58px);
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+/* Fin-Banner */
+
+/* Animaciones */
+@keyframes muestraMenu {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes derechaMenu {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+@keyframes izquierdaMenu {
+    form {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (min-width: 481px) and (max-width: 1024px){ /* tabletas */
+    .submenu-bar li{
+        padding-bottom: 10px;
+    }
+    .submenu-bar .marcas{
+        display: inline-block;
+        max-width: 130px;
+        max-height: 70px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .marcas + span{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1024px){ /* ordenadores */
+    .ham{
+        display: none;
+    }
+    #logo:hover{
+        filter: drop-shadow(0 0 5px #000);
+    }
+    .menu-icons{
+        justify-content: space-between;
+        padding: .5rem 1rem;
+    }
+    .user-cart-icons i:hover{
+        cursor: pointer;
+        text-shadow: 0 0 3px green;
+    }
+    .nav-bar{
+        display: block;
+        background-color: green;
+        height: 5ex;
+        position: relative;
+    }
+    .menu-bar{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        column-gap: 1rem;
+        padding-top: .5rem;
+        width: 100%;
+    }
+    .menu-bar a{
+        color: #fff;
+        font-size: 1.2rem;
+    }
+    .menu-bar li{
+        border: none;
+    }
+    .menu-bar a:hover{
+        color: red;
+    }
+    .menu-bar li:hover .submenu-bar{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        position: absolute;
+        top: 5ex;
+        left: 0;
+        right: 0;
+        background-color: aliceblue;
+        padding: 10px 20vw;
+        height: auto;
+        animation: muestraMenu 500ms ease-in-out both;
+    }
+    .submenu-bar li:first-child{
+        display: none;
+    }
+    .submenu-bar .marcas{
+        display: inline-block;
+        max-width: 130px;
+        max-height: 70px;
+    }
+    .submenu-bar .img-categoria{
+        display: inline-block;
+        max-width: 380px;
+        height: 100px;
+        border-radius: 50%;
+    }
+    .submenu-bar img:hover{
+        box-shadow: 0 0 3px 2px #000;
+    }
+    .marcas + span{
+        display: none;
+    }
+    .dis-productos a{
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+    .submenu-bar a{
+        color: black;
+    }
+    .submenu-bar a:hover{
+        color: green;
+        font-weight: bolder;
+    }
+    /* elimino la flecha de inicio */
+    .inicio-flecha{
+        display: none;
+    }
+    /* elimino la flecha derecha en aquellos <li> que no tienen submenús */
+    li:not(:has(.submenu-bar)) .submenu-flecha {
+        display: none;
+    }
+    .submenu-flecha{
+        font-size: 1.1rem;
+        margin-left: .2rem;
+    }
+    .search{
+        background-color: transparent;
+        width: 40%;
+    }
+    .search input[type="search"]{
+        border-width: thick;
+        border-color: green;
+        border-style: double;
+        height: 4ex;
+    }
+    .container-button{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        column-gap: 10px;
+        min-height: 7ex;
+    }
+}
